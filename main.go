@@ -1,6 +1,7 @@
 package main
 
 import (
+	"book/middleware"
 	"net/http"
 	"strconv"
 
@@ -40,7 +41,7 @@ func update(c *gin.Context) {
 	}
 
 	var book UpdatedBook
-	if err := c.BindJSON(&book); err != nil {
+	if err := c.BindJSON(book); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error ": err.Error()})
 		return
 	}
@@ -73,16 +74,25 @@ func delete(c *gin.Context) {
 }
 func setRoutes(r *gin.Engine) {
 
-	book := r.Group("/books")
+	//To apply middleware to whole app:
+	//r.Use(middleware.Authenticate) //applied to all routes
+
+	book := r.Group("/books") //To apply the middleware on a route group : { book := r.Group("/books", middleware.Authenticate)}
+	book.Use(
+		middleware.Authenticate(),
+		middleware.Logger(),
+		middleware.ResponseMiddleware(),
+	)
 	{
-		book.GET("/see", seeBooks)
+		book.GET("/see", seeBooks) //To apply the middleware to specific route :  { book.GET("/see",Middleware.Authenticate,seeBooks) }
 		book.POST("/add", addBook)
-		book.PUT("/update/:id", update)
+		book.PUT("/update", update)
 		book.DELETE("/delete", delete)
 	}
 }
 func main() {
-	r := gin.Default()
+	r := gin.Default() //pre-existing logger middleware	//to create custom : use - "gin.New()"
+
 	setRoutes(r)
 	r.Run(":8080")
 }
