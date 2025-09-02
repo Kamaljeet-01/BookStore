@@ -101,6 +101,11 @@ func main() {
 		log.Fatal("Db not initialized")
 	}
 	fmt.Println("App started successfully after DB connection.")
+	err := db.DB.AutoMigrate(&Book{})
+	if err != nil {
+		log.Fatal("Failed to migrate database schema")
+	}
+
 	setRoutes(r)
 	r.Run(":8080")
 }
