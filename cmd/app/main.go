@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
+	"book.com/internal/db"
 	"book.com/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -93,7 +96,11 @@ func setRoutes(r *gin.Engine) {
 }
 func main() {
 	r := gin.Default() //pre-existing logger middleware	//to create custom : use - "gin.New()"
-
+	db.Init()
+	if db.DB == nil {
+		log.Fatal("Db not initialized")
+	}
+	fmt.Println("App started successfully after DB connection.")
 	setRoutes(r)
 	r.Run(":8080")
 }
