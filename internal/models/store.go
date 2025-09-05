@@ -1,8 +1,11 @@
-package main
+package models
+
+import "gorm.io/gorm"
 
 var Shelf []Book
 
 type Book struct {
+	gorm.Model
 	Id    int    `json:"id"`
 	Name  string `json:"name"`
 	Price int    `json:"price"`
@@ -11,13 +14,4 @@ type Book struct {
 type UpdatedBook struct {
 	Name  string `json:"name"`
 	Price int    `json:"price"`
-}
-
-func Find(id int) int {
-	for i, b := range Shelf {
-		if b.Id == id {
-			return i
-		}
-	}
-	return -1
 }

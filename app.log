@@ -1,0 +1,7 @@
+INFO: 2025/09/05 16:38:08 middleware.go:48: [400] POST /books/add ::1 (0s)
+INFO: 2025/09/05 16:38:48 middleware.go:48: [201] POST /books/add ::1 (1.0743ms)
+INFO: 2025/09/05 16:39:05 middleware.go:48: [201] POST /books/add ::1 (0s)
+INFO: 2025/09/05 16:39:23 middleware.go:48: [201] POST /books/add ::1 (0s)
+INFO: 2025/09/05 16:39:35 middleware.go:48: [202] GET /books/see ::1 (0s)
+INFO: 2025/09/05 16:41:33 middleware.go:48: [202] GET /books/see ::1 (14.0293ms)
+INFO: 2025/09/05 16:42:18 middleware.go:48: [200] DELETE /books/delete/3 ::1 (7.9977ms)

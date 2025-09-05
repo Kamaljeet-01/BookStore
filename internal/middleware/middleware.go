@@ -12,7 +12,6 @@ import (
 var logger *log.Logger
 
 func init() {
-	// open/create a log file
 	file, err := os.OpenFile("app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal("Could not open log file: ", err)
@@ -34,7 +33,7 @@ func Authenticate() gin.HandlerFunc {
 
 func ResponseMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Writer.Header().Set("Key", "Value") //while giving response to client, it will set header.
+		c.Writer.Header().Set("Key", "Value")
 		c.Next()
 	}
 }
@@ -42,15 +41,10 @@ func ResponseMiddleware() gin.HandlerFunc {
 func Logger() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
-
-		// Process request
 		c.Next()
-
-		// After request
 		duration := time.Since(start)
 		status := c.Writer.Status()
 
-		// Write log to file
 		logger.Printf("[%d] %s %s %s (%s)",
 			status,
 			c.Request.Method,
