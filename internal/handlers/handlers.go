@@ -48,33 +48,8 @@ func AddBook(c *gin.Context) {
 func SeeBooks(c *gin.Context) {
 	c.JSON(http.StatusAccepted, models.Shelf)
 }
-
 func Update(c *gin.Context) {
-	// idStr := c.Param("id")
-	// id, err := strconv.Atoi(idStr)
-
-	// if err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "invalid book id"})
-	// 	return
-	// }
-
-	// var book models.UpdatedBook
-	// if err := c.BindJSON(book); err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error ": err.Error()})
-	// 	return
-	// }
-
-	// idx := models.Find(id)
-	// if idx != -1 {
-	// 	models.Shelf[idx].Name = book.Name
-	// 	models.Shelf[idx].Id = id
-	// 	models.Shelf[idx].Price = book.Price
-	// 	c.JSON(http.StatusAccepted, models.Shelf)
-	// } else {
-	// 	c.JSON(http.StatusBadRequest, gin.H{
-	// 		"Message": "Book you want to update is not in the Store",
-	// 	})
-	// }
+	//update function
 }
 
 func Delete(c *gin.Context) {
